@@ -28,10 +28,6 @@ import java.nio.charset.StandardCharsets
 
 class JsonLib private constructor(val jsonElement: JsonElement, private val currentGson: Gson) {
 
-
-    @Deprecated("Create via static method instead", ReplaceWith("JsonData.empty()"))
-    constructor() : this(JsonObject(), GSON)
-
     fun append(property: String, value: String?): JsonLib {
         if (jsonElement !is JsonObject)
             throw UnsupportedOperationException("Can't append element to JsonPrimitive.")

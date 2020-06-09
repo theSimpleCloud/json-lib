@@ -187,43 +187,54 @@ class JsonLib private constructor(val jsonElement: JsonElement, private val curr
 
         val GSON = GsonCreator().excludeAnnotations(JsonLibExclude::class.java).create()
 
+        @JvmStatic
         fun empty() = empty(GSON)
 
+        @JvmStatic
         fun empty(gson: Gson) = JsonLib(JsonObject(), gson)
 
+        @JvmStatic
         fun fromJsonElement(jsonElement: JsonElement): JsonLib {
             return JsonLib(jsonElement, GSON)
         }
 
+        @JvmStatic
         fun fromObject(any: Any): JsonLib {
             return fromJsonString(GSON.toJson(any))
         }
 
+        @JvmStatic
         fun fromObject(any: Any, gson: Gson): JsonLib {
             return fromJsonString(gson.toJson(any), gson)
         }
 
+        @JvmStatic
         fun fromJsonFile(path: String): JsonLib? {
             return fromJsonFile(File(path))
         }
 
+        @JvmStatic
         fun fromJsonFile(file: File): JsonLib? {
             if (!file.exists()) return null
             return fromJsonString(loadFile(file))
         }
 
+        @JvmStatic
         fun fromInputStream(inputStream: InputStream): JsonLib {
             return fromJsonString(loadFromInputStream(inputStream))
         }
 
+        @JvmStatic
         fun fromInputStream(inputStream: InputStream, gson: Gson): JsonLib {
             return fromJsonString(loadFromInputStream(inputStream), gson)
         }
 
+        @JvmStatic
         fun fromJsonString(string: String): JsonLib {
             return fromJsonString(string, GSON)
         }
 
+        @JvmStatic
         fun fromJsonString(string: String, gson: Gson): JsonLib {
             return try {
                 val jsonObject = gson.fromJson(string, JsonObject::class.java)

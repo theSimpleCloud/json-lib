@@ -24,6 +24,8 @@ package eu.thesimplecloud.jsonlib
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import eu.thesimplecloud.jsonlib.bukkit.LocationSerializer
+import org.bukkit.Location
 import kotlin.reflect.KClass
 
 class GsonCreator {
@@ -41,6 +43,10 @@ class GsonCreator {
     fun excludeAnnotations(vararg annotationClasses: Class<out Annotation>): GsonCreator {
         this.builder.setExclusionStrategies(AnnotationExclusionStrategy(*annotationClasses))
         return this
+    }
+
+    fun registerBukkitLocationTypeAdapter() {
+        builder.registerTypeAdapter(Location::class.java, LocationSerializer())
     }
 
     fun create(): Gson {

@@ -47,9 +47,10 @@ class GsonCreator {
         return this
     }
 
-    fun registerBukkitTypeAdapter() {
+    fun registerBukkitTypeAdapter(): GsonCreator {
         builder.registerTypeAdapter(Location::class.java, LocationSerializer())
         builder.registerTypeAdapter(ItemStack::class.java, ItemStackSerializer())
+        return this
     }
 
     fun create(): Gson {

@@ -181,7 +181,12 @@ class JsonLib private constructor(val jsonElement: JsonElement, private val curr
 
     companion object {
 
-        val GSON = GsonCreator().excludeAnnotations(JsonLibExclude::class.java).create()
+        var GSON = GsonCreator().excludeAnnotations(JsonLibExclude::class.java).create()
+            private set
+
+        fun setDefaultGson(gson: Gson) {
+            GSON = gson
+        }
 
         @JvmStatic
         fun empty() = empty(GSON)

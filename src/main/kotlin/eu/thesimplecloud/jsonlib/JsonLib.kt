@@ -83,32 +83,37 @@ class JsonLib private constructor(val jsonElement: JsonElement, private val curr
 
     fun getInt(property: String): Int? {
         if (jsonElement !is JsonObject) throw UnsupportedOperationException("Can't get element from JsonPrimitive.")
-        return if (!jsonElement.has(property)) null else jsonElement.get(property).asInt
+        return if (!jsonElement.has(property)) null else jsonElement.getOrNull(property)?.asInt
     }
 
     fun getLong(property: String): Long? {
         if (jsonElement !is JsonObject) throw UnsupportedOperationException("Can't get element from JsonPrimitive.")
-        return if (!jsonElement.has(property)) null else jsonElement.get(property).asLong
+        return if (!jsonElement.has(property)) null else jsonElement.getOrNull(property)?.asLong
     }
 
     fun getDouble(property: String): Double? {
         if (jsonElement !is JsonObject) throw UnsupportedOperationException("Can't get element from JsonPrimitive.")
-        return if (!jsonElement.has(property)) null else jsonElement.get(property).asDouble
+        return if (!jsonElement.has(property)) null else jsonElement.getOrNull(property)?.asDouble
     }
 
     fun getFloat(property: String): Float? {
         if (jsonElement !is JsonObject) throw UnsupportedOperationException("Can't get element from JsonPrimitive.")
-        return if (!jsonElement.has(property)) null else jsonElement.get(property).asFloat
+        return if (!jsonElement.has(property)) null else jsonElement.getOrNull(property)?.asFloat
     }
 
     fun getBoolean(property: String): Boolean? {
         if (jsonElement !is JsonObject) throw UnsupportedOperationException("Can't get element from JsonPrimitive.")
-        return if (!jsonElement.has(property)) null else jsonElement.get(property).asBoolean
+        return if (!jsonElement.has(property)) null else jsonElement.getOrNull(property)?.asBoolean
     }
 
     fun getAsJsonArray(property: String): JsonArray? {
         if (jsonElement !is JsonObject) throw UnsupportedOperationException("Can't get element from JsonPrimitive.")
-        return if (!jsonElement.has(property)) null else jsonElement.get(property).asJsonArray
+        return if (!jsonElement.has(property)) null else jsonElement.getOrNull(property)?.asJsonArray
+    }
+
+    fun getString(property: String): String? {
+        if (jsonElement !is JsonObject) throw UnsupportedOperationException("Can't get element from JsonPrimitive.")
+        return if (!jsonElement.has(property)) null else jsonElement.getOrNull(property)?.asString
     }
 
 
@@ -132,11 +137,6 @@ class JsonLib private constructor(val jsonElement: JsonElement, private val curr
             null
         }
 
-    }
-
-    fun getString(property: String): String? {
-        if (jsonElement !is JsonObject) throw UnsupportedOperationException("Can't get element from JsonPrimitive.")
-        return if (!jsonElement.has(property)) null else jsonElement.get(property).asString
     }
 
 

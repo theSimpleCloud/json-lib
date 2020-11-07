@@ -28,6 +28,7 @@ import eu.thesimplecloud.jsonlib.bukkit.ItemStackSerializer
 import eu.thesimplecloud.jsonlib.bukkit.LocationSerializer
 import org.bukkit.Location
 import org.bukkit.inventory.ItemStack
+import java.lang.reflect.Type
 import kotlin.reflect.KClass
 
 class GsonCreator {
@@ -51,6 +52,10 @@ class GsonCreator {
         builder.registerTypeAdapter(Location::class.java, LocationSerializer())
         builder.registerTypeAdapter(ItemStack::class.java, ItemStackSerializer())
         return this
+    }
+
+    fun registerTypeAdapter(type: Type, typeAdapter: Any) {
+        builder.registerTypeAdapter(type, typeAdapter)
     }
 
     fun create(): Gson {

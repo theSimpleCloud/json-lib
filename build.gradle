@@ -6,7 +6,7 @@ plugins {
 }
 
 group 'eu.thesimplecloud.jsonlib'
-version '1.0.6'
+version '1.0.7'
 
 repositories {
     mavenCentral()
@@ -24,7 +24,7 @@ repositories {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     testCompile group: 'junit', name: 'junit', version: '4.12'
     compile group: 'com.google.code.gson', name: 'gson', version: '2.8.6'
     compileOnly 'org.spigotmc:spigot-api:1.15.1-R0.1-SNAPSHOT'
@@ -44,4 +44,17 @@ compileKotlin {
 }
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
+}
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'eu.thesimplecloud.jsonlib.netty.NettySerializerKt',
+                'Implementation-Version': project.version,
+        )
+    }
+    // This line of code recursively collects and copies all of a project's files
+    // and adds them to the JAR itself. One can extend this task, to skip certain
+    // files or particular types at will
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
 }

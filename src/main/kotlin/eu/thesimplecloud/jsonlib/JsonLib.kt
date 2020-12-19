@@ -210,14 +210,14 @@ class JsonLib private constructor(val jsonElement: JsonElement, private val curr
         }
 
         @JvmStatic
-        fun fromJsonFile(path: String): JsonLib? {
-            return fromJsonFile(File(path))
+        fun fromJsonFile(path: String, gson: Gson = GSON): JsonLib? {
+            return fromJsonFile(File(path), gson)
         }
 
         @JvmStatic
-        fun fromJsonFile(file: File): JsonLib? {
+        fun fromJsonFile(file: File, gson: Gson = GSON): JsonLib? {
             if (!file.exists()) return null
-            return fromJsonString(loadFile(file))
+            return fromJsonString(loadFile(file), gson)
         }
 
         @JvmStatic
@@ -231,12 +231,7 @@ class JsonLib private constructor(val jsonElement: JsonElement, private val curr
         }
 
         @JvmStatic
-        fun fromJsonString(string: String): JsonLib {
-            return fromJsonString(string, GSON)
-        }
-
-        @JvmStatic
-        fun fromJsonString(string: String, gson: Gson): JsonLib {
+        fun fromJsonString(string: String, gson: Gson = GSON): JsonLib {
             return try {
                 val jsonObject = gson.fromJson(string, JsonObject::class.java)
                 JsonLib(jsonObject, gson)

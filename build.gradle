@@ -6,7 +6,7 @@ plugins {
 }
 
 group 'eu.thesimplecloud.jsonlib'
-version '1.0.7'
+version '1.0.8'
 
 repositories {
     mavenCentral()
@@ -67,17 +67,4 @@ compileKotlin {
 }
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
-}
-
-jar {
-    manifest {
-        attributes(
-                'Main-Class': 'eu.thesimplecloud.jsonlib.netty.NettySerializerKt',
-                'Implementation-Version': project.version,
-        )
-    }
-    // This line of code recursively collects and copies all of a project's files
-    // and adds them to the JAR itself. One can extend this task, to skip certain
-    // files or particular types at will
-    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
 }

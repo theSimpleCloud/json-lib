@@ -178,6 +178,19 @@ class JsonLib private constructor(val jsonElement: JsonElement, private val curr
         return getAsJsonString().toByteArray(StandardCharsets.UTF_8)
     }
 
+    fun getEntrySet(): MutableSet<MutableMap.MutableEntry<String, JsonElement>> {
+        val element = this.jsonElement
+        if (element !is JsonObject) {
+            throw UnsupportedOperationException("Can't get keys from JsonPrimitive.")
+        }
+        return element.entrySet()
+    }
+
+    fun getAllKeys(): List<String> {
+        val entrySet = getEntrySet()
+        return entrySet.map { it.key }
+    }
+
 
     companion object {
 
